@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "521760182969",
+    "firebase_url": "https://fbconsumerappswift5v1.firebaseio.com",
+    "project_id": "fbconsumerappswift5v1",
+    "storage_bucket": "fbconsumerappswift5v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521760182969:android:a96c9c43b7122c5dc18168",
+        "android_client_info": {
+          "package_name": "com.grammedia.fbconsumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHW5O4dDny8dDlK0zCopv3zIVR2sRvs-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "521760182969-n1qjc2aom76lootiniio91kh9b1bmjbm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "c.FBConsumerAppSwift5v1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FBConsumer</string>
+    <string name="doposttoken_text">doPostToken</string>
+    <string name="pageview_text">PageView</string>
+    <string name="productview_text">ProductView</string>
+    <string name="add2cart_text">Add2cart</string>
+    <string name="removefromcart_text">RemoveFromCart</string>
+    <string name="placeorder_text">PlaceOrder</string>
+    <string name="postcart_text">PostCart</string>
+    <string name="post_contact_email_text">Post Contact Email</string>
+    <string name="fbconsumer_channel">FCAM_CHANNEL</string>
+</resources>
