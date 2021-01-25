@@ -36,5 +36,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     implementation 'androidx.work:work-runtime:2.3.4'
     //  Gson
-    implementation 'com.github.maximtrapps:android:v0.2.0'
+    implementation project(":FBSDKConsumer")
 }
