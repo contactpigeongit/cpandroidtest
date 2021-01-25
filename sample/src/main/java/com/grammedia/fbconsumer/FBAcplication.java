@@ -1,28 +1,13 @@
 package com.grammedia.fbconsumer;
 
-import android.app.Application;
+import com.grammedia.fbsdkconsumer.FBSDKApplication;
+import com.grammedia.fbsdkconsumer.data.CPConnectionService;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ProcessLifecycleOwner;
-
-public class FBAcplication extends Application implements LifecycleObserver {
-    public static boolean IS_APP_IN_FOREGROUND = false;
-
+public class FBAcplication extends FBSDKApplication {   // extend application class our library
     @Override
     public void onCreate() {
+        // One place initizializeion library
+        CPConnectionService.init(getApplicationContext());
         super.onCreate();
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void appInForeground(){
-        IS_APP_IN_FOREGROUND = true;
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void appInBackground(){
-        IS_APP_IN_FOREGROUND = false;
     }
 }

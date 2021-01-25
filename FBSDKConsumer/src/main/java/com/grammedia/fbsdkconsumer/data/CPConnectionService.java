@@ -17,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
@@ -35,12 +36,23 @@ import java.util.Locale;
 import java.util.Map;
 
 public class CPConnectionService {
-
+    private static CPConnectionService cpConnectionService;
     private Context context;
     public static final String TAG = "FBCONSUMER_LOG";
 
-    public CPConnectionService(Context context) {
-        this.context = context;
+    public static CPConnectionService init(Context context) { // create singlton and using project everywhere
+        if (cpConnectionService == null) {
+            cpConnectionService = new CPConnectionService();
+            cpConnectionService.context = context;
+            FirebaseApp.initializeApp(context);
+        }
+        return cpConnectionService;
+    }
+    public static CPConnectionService getInstance() {
+        return cpConnectionService;
+    }
+
+    private CPConnectionService() {
     }
 
     public void initWithOptions(String appscptoken, String appscpgroup, String appscpname, String doPostCartScreenshot, String isFIRAlreadyInc) {

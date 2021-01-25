@@ -1,3 +1,2 @@
-include ':FBSDKConsumer'
 include ':sample'
 rootProject.name='FBConsumer'

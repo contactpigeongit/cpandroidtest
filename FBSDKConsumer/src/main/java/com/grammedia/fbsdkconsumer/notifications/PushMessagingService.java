@@ -1,10 +1,10 @@
-package com.grammedia.fbconsumer.notifications;
+package com.grammedia.fbsdkconsumer.notifications;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,8 +16,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.grammedia.fbconsumer.FBAcplication;
-import com.grammedia.fbconsumer.MainActivity;
+import com.grammedia.fbsdkconsumer.FBSDKApplication;
 import com.grammedia.fbsdkconsumer.PrefUtils;
 import com.grammedia.fbsdkconsumer.R;
 import com.grammedia.fbsdkconsumer.data.CPConnectionService;
@@ -32,12 +31,10 @@ public class PushMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "PushMessagingService";
     Bitmap bitmapBigImage;
-    CPConnectionService gregorysConnector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        gregorysConnector = new CPConnectionService(this);
     }
 
     // [START receive_message]
@@ -78,17 +75,14 @@ public class PushMessagingService extends FirebaseMessagingService {
     public void onNewToken(String newToken) {
         System.out.println("Refreshed token: " + newToken);
         PrefUtils.getEditor(getApplicationContext()).putString(kUDFCMToken,newToken).commit();
-        gregorysConnector.getRegistrationToken();
+        CPConnectionService.getInstance().getRegistrationToken();
     }
     // [END on_new_token]
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
+
     private void sendNotification(RemoteMessage userInfo) {
-        gregorysConnector.didRecieveNotificationExtensionRequest(userInfo.getData(), FBAcplication.IS_APP_IN_FOREGROUND);
-        Intent intent = new Intent(this, MainActivity.class);
+        CPConnectionService.getInstance().didRecieveNotificationExtensionRequest(userInfo.getData(), FBSDKApplication.IS_APP_IN_FOREGROUND);
+        String mPackage = getApplicationContext().getPackageName();
+        Intent intent =  Intent.makeMainActivity(new ComponentName(mPackage,mPackage + ".MainActivity"));
         intent.putExtra("Test","Test data");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -99,8 +93,8 @@ public class PushMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(userInfo.getNotification().getTitle())
-                        .setContentText(userInfo.getNotification().getBody())
+                        .setContentTitle(userInfo.getData().get("title"))
+                        .setContentText(userInfo.getData().get("body"))
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
@@ -110,7 +104,7 @@ public class PushMessagingService extends FirebaseMessagingService {
         }
 
         NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

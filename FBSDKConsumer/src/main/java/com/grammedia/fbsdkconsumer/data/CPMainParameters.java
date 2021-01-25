@@ -16,7 +16,7 @@ public class CPMainParameters {
         return instance;
     }
 
-    public String cpSubmitDataEndpoint = "https://plato.contactpigeon.com/bi/atlantis/various/0587d93972144bd394f77eca8e2cecdd/";
+    public String cpSubmitDataEndpoint = "https://plato.contactpigeon.com/bi/atlantis/various/0587d93972144bd394f77eca8e2cecdd_cordova/";
     public String cptoken = "";
     public String fcmToken = "";
     public String cuem = "";

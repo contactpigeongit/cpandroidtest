@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.grammedia.fbsdkconsumer.FBSDKActivity;
 import com.grammedia.fbsdkconsumer.data.CPConnectionService;
 import com.grammedia.fbsdkconsumer.data.CPMainParameters;
 
@@ -19,11 +20,10 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
-    CPConnectionService gregorysConnector;
-    String gregorysCPToken = "f5f49293fb634246b546ffc80d09cdc0";
-    String gregorysCPGroupName = "Cp test";
-    String gregorysCPName = "moirizw";
+public class MainActivity extends FBSDKActivity {
+    private final String CPToken = "f5f49293fb634246b546ffc80d09cdc0";
+    private final String CPGroupName = "Cp test";
+    private final String CPName = "moirizw";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,43 +31,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setTitle("Check your Console Now 2");
-        registerChannelNotification();
-        gregorysConnector = new CPConnectionService(this);
-        gregorysConnector.initWithOptions(gregorysCPToken, gregorysCPGroupName, gregorysCPName, "", "");
-        gregorysConnector.askforregistration();
-        if (getIntent().getExtras() != null) {
-            Map<String, String> userInfo = new HashMap<>();
-            for (String key : getIntent().getExtras().keySet()) {
-                Object value = getIntent().getExtras().get(key);
-                userInfo.put(key, String.valueOf(value));
-                Log.d("asd", "Key: " + key + " Value: " + value);
-            }
-            gregorysConnector.didRecieveNotificationExtensionRequest(userInfo, FBAcplication.IS_APP_IN_FOREGROUND);
-        }
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()) {
-                Object value = getIntent().getExtras().get(key);
-                Log.d("asd", "Key: " + key + " Value: " + value);
-            }
-        }
+        CPConnectionService.getInstance().initWithOptions(CPToken, CPGroupName, CPName, "", "");
+        CPConnectionService.getInstance().askforregistration();
     }
 
     @OnClick(R.id.btn_do_post_token)
     public void postTokenBtnPressed(View view) {
-        gregorysConnector.resetcurSessionFCMTokenPosted("no");
-        gregorysConnector.postFCMTokenToCP(CPMainParameters.getInstance().fcmToken);
+        CPConnectionService.getInstance().resetcurSessionFCMTokenPosted("no");
+        CPConnectionService.getInstance().postFCMTokenToCP(CPMainParameters.getInstance().fcmToken);
     }
 
     @OnClick(R.id.btn_page_view)
     public void pageViewBtnPressed(View view) {
         String utmdt = "my simple Page View";
         String utmp = "/myandroidapp/category/subcategory/mypage/";
-        gregorysConnector.pageView(utmdt, utmp);
+        CPConnectionService.getInstance().pageView(utmdt, utmp);
     }
 
     @OnClick(R.id.btn_product_view)
@@ -75,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         String pName = "το προϊον μου";
         String pSku = "12345-abcd";
         String utmp = "/myandroidapp/myprodpage/";
-        gregorysConnector.productView(pName, pSku, utmp);
+        CPConnectionService.getInstance().productView(pName, pSku, utmp);
     }
 
     @OnClick(R.id.btn_add_2_cart)
@@ -86,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         double pUnitPrice = 12.36;
         String utmp = "/myandroidapp/myprodpage/";
         String pimg = "";
-        gregorysConnector.add2cart(pName, pSku, pQty, pUnitPrice, pimg, utmp);
+        CPConnectionService.getInstance().add2cart(pName, pSku, pQty, pUnitPrice, pimg, utmp);
     }
 
     @OnClick(R.id.btn_remove_from_cart)
@@ -97,43 +75,29 @@ public class MainActivity extends AppCompatActivity {
         double pUnitPrice = 12.36;
         String utmp = "/myandroidapp/myprodpage/";
         String pimg = "";
-        gregorysConnector.removefromcart(pName, pSku, pQty, pUnitPrice, pimg, utmp);
+        CPConnectionService.getInstance().removefromcart(pName, pSku, pQty, pUnitPrice, pimg, utmp);
     }
 
     @OnClick(R.id.btn_place_order)
     public void placeOrderBtnPressed(View view) {
         String utmp = "";
-        gregorysConnector.setOrderData("oid-0008", 36.36);
-        gregorysConnector.addOrderItem("81", "Four Punch Man T-Shirt", 2, 149);
-        gregorysConnector.addOrderItem("49", "Sassy, loose fit dual tone dress", 5, 190);
-        gregorysConnector.postOrder(utmp);
+        CPConnectionService.getInstance().setOrderData("oid-0008", 36.36);
+        CPConnectionService.getInstance().addOrderItem("81", "Four Punch Man T-Shirt", 2, 149);
+        CPConnectionService.getInstance().addOrderItem("49", "Sassy, loose fit dual tone dress", 5, 190);
+        CPConnectionService.getInstance().postOrder(utmp);
     }
 
     @OnClick(R.id.btn_post_cart)
     public void postCartBtnPressed(View view) {
-        gregorysConnector.postCart();
+        CPConnectionService.getInstance().postCart();
     }
 
     @OnClick(R.id.btn_post_contact_email)
     public void postContactEmailBtnPressed(View view) {
         String cp_curEmail = "test@test.gr";
         String utmp = "/myandroidapp/category/subcategory/mypage/";
-        gregorysConnector.setContactMail(cp_curEmail,utmp);
+        CPConnectionService.getInstance().setContactMail(cp_curEmail,utmp);
     }
-
-    private void registerChannelNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create channel to show notifications.
-            String channelId  = getResources().getString(R.string.default_notification_channel_id);
-            String channelName = getResources().getString(R.string.fbconsumer_channel);
-            NotificationManager notificationManager =
-                    getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
-                    channelName, NotificationManager.IMPORTANCE_HIGH));
-        }
-    }
-
-
 
 }
 

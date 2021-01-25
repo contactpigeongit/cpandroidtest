@@ -8,6 +8,114 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:521760182969:android:ff852ff73f8d2892c18168",
+        "android_client_info": {
+          "package_name": "com.contactpigeon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHW5O4dDny8dDlK0zCopv3zIVR2sRvs-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "521760182969-aqudqrrsphgpsena6vqs85qplcsrrqik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.contactpigeon.androidapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521760182969:android:3168ff301eeca55dc18168",
+        "android_client_info": {
+          "package_name": "com.contactpigeon.androidapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHW5O4dDny8dDlK0zCopv3zIVR2sRvs-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "521760182969-aqudqrrsphgpsena6vqs85qplcsrrqik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.contactpigeon.androidapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521760182969:android:0baf18c27dca6ecfc18168",
+        "android_client_info": {
+          "package_name": "com.contactpigeon.plugintest7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHW5O4dDny8dDlK0zCopv3zIVR2sRvs-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "521760182969-aqudqrrsphgpsena6vqs85qplcsrrqik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.contactpigeon.androidapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:521760182969:android:a96c9c43b7122c5dc18168",
         "android_client_info": {
           "package_name": "com.grammedia.fbconsumer"
@@ -32,10 +140,46 @@
               "client_type": 3
             },
             {
-              "client_id": "521760182969-n1qjc2aom76lootiniio91kh9b1bmjbm.apps.googleusercontent.com",
+              "client_id": "521760182969-aqudqrrsphgpsena6vqs85qplcsrrqik.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "c.FBConsumerAppSwift5v1"
+                "bundle_id": "com.contactpigeon.androidapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521760182969:android:d27bb9f795044e05c18168",
+        "android_client_info": {
+          "package_name": "com.grammedia.fbsdkconsumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHW5O4dDny8dDlK0zCopv3zIVR2sRvs-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521760182969-pcmaeemduq0gh4c34g17tukvmpu8gkpm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "521760182969-aqudqrrsphgpsena6vqs85qplcsrrqik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.contactpigeon.androidapp"
               }
             }
           ]
