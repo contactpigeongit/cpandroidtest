@@ -464,11 +464,7 @@ public class CPConnectionService {
         if (NotificationManagerCompat.from(context).areNotificationsEnabled()) {
             CPMainParameters.getInstance().notsAllowed = "yes";
             PrefUtils.getEditor(context).putString("notsAllowed", CPMainParameters.getInstance().notsAllowed).commit();
-            if (PrefUtils.getPrefs(context).getString("fcmToken", "").isEmpty()) {
-                getRegistrationToken();
-            } else {
-                CPMainParameters.getInstance().fcmToken = PrefUtils.getPrefs(context).getString("fcmToken", "");
-            }
+            getRegistrationToken();
         } else {
             CPMainParameters.getInstance().notsAllowed = "no";
             PrefUtils.getEditor(context).putString("notsAllowed", CPMainParameters.getInstance().notsAllowed).commit();
@@ -489,11 +485,20 @@ public class CPConnectionService {
                         }
                         // Get new Instance ID token
                         String fcmToken = task.getResult().getToken();
-                        printMsg(String.format("getRegistrationToken fcmToken:%s", fcmToken));
-                        postFCMTokenToCP(fcmToken);
-                        CPMainParameters.getInstance().isPushActive = true;
-                        CPMainParameters.getInstance().fcmToken = fcmToken;
-                        PrefUtils.getEditor(context).putString("fcmToken", fcmToken).commit();
+                        String currentFCMToken = PrefUtils.getPrefs(context).getString("fcmToken", "");
+                        if (currentFCMToken.isEmpty()) {
+                            printMsg(String.format("getRegistrationToken fcmToken:%s", fcmToken));
+                            postFCMTokenToCP(fcmToken);
+                            CPMainParameters.getInstance().isPushActive = true;
+                            CPMainParameters.getInstance().fcmToken = fcmToken;
+                            PrefUtils.getEditor(context).putString("fcmToken", fcmToken).commit();
+                        } else if (!fcmToken.equals(currentFCMToken)) {
+                            PrefUtils.getEditor(context).putString("oldfcmtoken", currentFCMToken).commit();
+                            PrefUtils.getEditor(context).putString("fcmToken",fcmToken).commit();
+                            CPMainParameters.getInstance().fcmToken = fcmToken;
+                        } else {
+                            CPMainParameters.getInstance().fcmToken = currentFCMToken;
+                        }
                     }
                 });
     }
